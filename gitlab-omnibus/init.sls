@@ -51,6 +51,7 @@ gitlab:
       - cmd: gitlab-upgrade
       - cmd: gitlab-reconfigure
 
+{% if 'url' in gitlab %}
 gitlab-url:
   file.replace:
     - name: {{ gitlab.config_file }}
@@ -59,6 +60,7 @@ gitlab-url:
     - append_if_not_found: True
     - require:
       - pkg: gitlab
+{% endif %}
 
 {% if 'registry_external_url' in gitlab %}
 docker-registry-url:
