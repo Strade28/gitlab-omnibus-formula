@@ -126,7 +126,7 @@ gitlab-config-{{ section }}-{{ key }}:
         {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
         {{ value }}
         EOS
-{% endif %}
+{% else %}
          
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
@@ -135,6 +135,7 @@ gitlab-config-{{ section }}-{{ key }}:
         {%- endif %}
     - require_in:
       - file: gitlab-config
+{% endif %}
 {% endfor %}
 {% endfor %}
 
