@@ -131,9 +131,9 @@ gitlab-config-{{ section }}-{{ key }}:
         {%- else -%}
         {{ value|yaml_encode }}
         {%- endif %}
+{% endif %}
     - require_in:
       - file: gitlab-config
-{% endif %}
 {% endfor %}
 {% endfor %}
 
