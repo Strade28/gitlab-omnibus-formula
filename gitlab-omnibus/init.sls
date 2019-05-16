@@ -116,6 +116,7 @@ gitlab-config:
 
 {% for section, val in gitlab.config|dictsort %}
 {% for key, value in val|dictsort %}
+
 gitlab-config-{{ section }}-{{ key }}:
   file.accumulated:
     - name: gitlab-config-accumulator
