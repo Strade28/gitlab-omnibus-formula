@@ -137,16 +137,6 @@ gitlab-upgrade:
     - onchanges:
       - pkg: gitlab
 
-pg_trgm:
-  postgres_extension.present:
-    - name: pg_trgm
-    - user: root
-    - db_user: gitlab
-    - db_password: password
-    - maintenance_db: gitlab_production
-    - db_host: '192.168.9.30'
-    - db_port: '9999'
-
 # gitlab does not initialize the service, if a docker-environment is detected
 gitlab-reconfigure:
   cmd.run:
@@ -156,5 +146,4 @@ gitlab-reconfigure:
     - onchanges:
       - file: gitlab-config
       - file: gitlab-url
-      - postgres_extension: pg_trgm
 
