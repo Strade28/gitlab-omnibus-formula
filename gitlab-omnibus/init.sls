@@ -122,7 +122,6 @@ gitlab-config-{{ section }}-{{ key }}:
     - name: gitlab-config-accumulator
     - filename: {{ gitlab.config_file }}
     - text: |
-         
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
         {%- else -%}
