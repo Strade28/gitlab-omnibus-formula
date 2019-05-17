@@ -118,27 +118,16 @@ gitlab-config:
 
 {% for section, val in gitlab.config|dictsort %}
 {% for key, value in val|dictsort %}
-
 gitlab-config-{{ section }}-{{ key }}:
   file.accumulated:
     - name: gitlab-config-accumulator
     - filename: {{ gitlab.config_file }}
     - text: |
-{% if key == "ldap_servers" %}
-        {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
-      main:
-        label: 'dede'
-        label: 'dede'
-        label: 'dede'
-        label: 'dede'
-        EOS
-{% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
         {%- else -%}
         {{ value|yaml_encode }}
         {%- endif %}
-{% endif %}
     - require_in:
       - file: gitlab-config
 {% endfor %}
