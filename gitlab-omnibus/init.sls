@@ -122,7 +122,7 @@ gitlab-config-{{ section }}-{{ key }}:
     - name: gitlab-config-accumulator
     - filename: {{ gitlab.config_file }}
     - text: |
-{% if key == "ldap_servers" %}
+{% if key == "ldap_enabled" %}
         {% import_yaml files/ldap.yaml as ldap %}
         {{ section }}['{{ key }}'] = {{ "YAML.load <<-'EOS'\n" ~ ldap|yaml ~ "\n" }}
 {% else %}
