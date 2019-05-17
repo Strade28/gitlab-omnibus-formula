@@ -113,6 +113,8 @@ gitlab-config:
   file.blockreplace:
     - name: {{ gitlab.config_file }}
     - prepend_if_not_found: True
+    - source:
+      - salt://files/ldap.sls
 
 {% for section, val in gitlab.config|dictsort %}
 {% for key, value in val|dictsort %}
