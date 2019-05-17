@@ -1,2 +1,3 @@
-main:
-  test: 'test'
+ldap:
+  main:
+    test: 'test'
