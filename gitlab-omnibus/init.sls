@@ -1,4 +1,5 @@
 {% from "gitlab-omnibus/map.jinja" import gitlab with context %}
+{% import_yaml files/ldap.yaml as ldap %}
 
 include:
   - .repo
@@ -123,7 +124,6 @@ gitlab-config-{{ section }}-{{ key }}:
     - filename: {{ gitlab.config_file }}
     - text: |
 {% if key == "ldap_enabled" %}
-        {% import_yaml files/ldap.yaml as ldap %}
         {{ section }}['{{ key }}'] = {{ "YAML.load <<-'EOS'\n" ~ ldap.main|yaml ~ "\n" }}
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
