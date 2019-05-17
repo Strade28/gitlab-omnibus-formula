@@ -124,13 +124,13 @@ gitlab-config-{{ section }}-{{ key }}:
     - text: |
 {% if key == "ldap_servers" %}
         {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
-        {{ value|yaml_encode }}
+        {{ value|yaml }}
         EOS
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
         {%- else -%}
-        {{ value|yaml }}
+        {{ value|yaml_encode }}
         {%- endif %}
 {% endif %}
     - require_in:
