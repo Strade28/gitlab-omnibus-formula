@@ -113,21 +113,25 @@ gitlab-config:
   file.blockreplace:
     - name: {{ gitlab.config_file }}
     - prepend_if_not_found: True
-    - source:
-      - salt://files/ldap.conf.j2
 
 {% for section, val in gitlab.config|dictsort %}
 {% for key, value in val|dictsort %}
+
 gitlab-config-{{ section }}-{{ key }}:
   file.accumulated:
     - name: gitlab-config-accumulator
     - filename: {{ gitlab.config_file }}
     - text: |
+{% if key == "ldap_servers" %}
+        {% import_yaml files/ldap.yaml as ldap %}
+        {{ section }}['{{ key }}'] = {{ "YAML.load <<-'EOS'\n" ~ ldap|yaml ~ "\n" %}
+{% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
         {%- else -%}
         {{ value|yaml_encode }}
         {%- endif %}
+{% endif %}
     - require_in:
       - file: gitlab-config
 {% endfor %}
