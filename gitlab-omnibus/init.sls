@@ -123,10 +123,12 @@ gitlab-config-{{ section }}-{{ key }}:
     - filename: {{ gitlab.config_file }}
     - text: |
 {% if key == "ldap_servers" %}
-        {{ section }}['{{ key }}'] = YAML.load <<-'EOS'\n
+        {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
+        main:
         {% for k, v in value|dictsort %}
-        {{ k ~ ": " ~ v }}
+        {{ k ~ ": " ~ v ~ }}
         {% endfor %}
+        EOS
 
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
