@@ -1,5 +1,5 @@
 {% from "gitlab-omnibus/map.jinja" import gitlab with context %}
-{% import_yaml ldap.yaml as ldap with context %}
+{% import_yaml 'ldap.yaml' as ldap with context %}
 
 include:
   - .repo
