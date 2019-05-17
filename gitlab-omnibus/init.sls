@@ -114,7 +114,7 @@ gitlab-config:
     - name: {{ gitlab.config_file }}
     - prepend_if_not_found: True
     - source:
-      - salt://files/ldap.sls
+      - salt://files/ldap.conf.j2
 
 {% for section, val in gitlab.config|dictsort %}
 {% for key, value in val|dictsort %}
