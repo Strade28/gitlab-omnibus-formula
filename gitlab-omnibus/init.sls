@@ -132,7 +132,7 @@ gitlab-config-{{ section }}-{{ key }}:
 
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
-        {{ value|indent(8) }}
+        {{ value|indent(4) }}
         {%- else -%}
         {{ value|yaml_encode }}
         {%- endif %}
