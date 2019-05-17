@@ -126,8 +126,7 @@ gitlab-config-{{ section }}-{{ key }}:
         {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
         main:
         {% for k, v in value|dictsort %}
-        {{ set tmp = k ~ ": " ~ v }}
-        {{ tmp|indent(2) }}
+        {{ k ~ ": " ~ v }}
         {% endfor %}
         EOS
 
