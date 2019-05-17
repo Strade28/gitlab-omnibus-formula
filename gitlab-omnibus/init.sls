@@ -130,7 +130,7 @@ gitlab-config-{{ section }}-{{ key }}:
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
         {%- else -%}
-        {{ value|yaml_encode }}
+        {{ value|yaml }}
         {%- endif %}
 {% endif %}
     - require_in:
