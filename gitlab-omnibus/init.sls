@@ -126,13 +126,13 @@ gitlab-config-{{ section }}-{{ key }}:
         {{ section }}['{{ key }}'] = YAML.load <<-'EOS'
         main:
         {%- for k, v in value|dictsort -%}
-        {{ k|indent(2) ~ ": " ~ v }}
+        {{ k|indent(8) ~ ": " ~ v }}
         {% endfor -%}
         EOS
 
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
-        {{ value|indent(4) }}
+        {{ value|indent(8) }}
         {%- else -%}
         {{ value|yaml_encode }}
         {%- endif %}
