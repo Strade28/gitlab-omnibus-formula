@@ -124,7 +124,7 @@ gitlab-config-{{ section }}-{{ key }}:
     - text: |
 {% if key == "ldap_servers" %}
         {% import_yaml files/ldap.yaml as ldap %}
-        {{ section }}['{{ key }}'] = {{ "YAML.load <<-'EOS'\n" ~ ldap|yaml ~ "\n" %}
+        {{ section }}['{{ key }}'] = {{ "YAML.load <<-'EOS'\n" ~ ldap|yaml ~ "\n" }}
 {% else %}
         {{ section }}['{{ key }}'] = {% if value is string -%}
         {{ value|indent(8) }}
